@@ -1,39 +1,61 @@
-🚀 Jenkins CI/CD Pipeline Project
-📌 Overview
+# 🚀 Jenkins CI/CD Pipeline Project
 
-This project demonstrates a complete CI/CD pipeline using Jenkins and Docker to automate the build, image creation, and deployment of a Node.js application.
+## 📌 Overview
+This project demonstrates a complete **CI/CD pipeline using Jenkins** to automate the build, containerization, and deployment of a Node.js application using Docker.
 
-Whenever code is pushed to GitHub, Jenkins automatically builds the application, creates a Docker image, pushes it to Docker Hub, and deploys it as a running container.
+Whenever code is pushed to GitHub, Jenkins automatically triggers the pipeline and performs the full workflow without manual intervention.
 
-⚙️ Tech Stack
-Jenkins
-GitHub
-Node.js
-Docker
-Docker Hub
-🔄 CI/CD Workflow
-GitHub → Jenkins → Docker Build → Docker Hub → Deployment
-Pipeline Steps:
-Checkout code from GitHub
-Build Docker image
-Push image to Docker Hub
-Stop old container (if running)
-Run new container with updated image
-🐳 Docker Run Command
+---
+
+## 🛠️ Tech Stack
+- ⚙️ Jenkins  
+- 🐙 GitHub  
+- 🟢 Node.js  
+- 🐳 Docker  
+- ☁️ Docker Hub  
+
+---
+
+## 🔄 CI/CD Pipeline Flow
+GitHub → Jenkins → Docker Build → Docker Hub → Deployment  
+
+---
+
+## 📊 Pipeline Stages
+- 🔹 Clone source code from GitHub  
+- 🔹 Build Docker image using Dockerfile  
+- 🔹 Push image to Docker Hub  
+- 🔹 Stop & remove old container (if running)  
+- 🔹 Deploy new container with latest image  
+
+---
+
+## 🐳 Docker Run Command
 docker run -d --name myapp -p 3000:3000 tarunrajput12/jenkins-demo:latest
-🌐 Access Application
-Jenkins: http://localhost:8080
-Application: http://localhost:3000
-🔐 Credentials Used
-GitHub credentials for repository access
-Docker Hub credentials for image push
-(All managed securely in Jenkins Credentials Manager)
-🧠 Key Learnings
-CI/CD pipeline automation
-Jenkins pipeline as code (Jenkinsfile)
-Docker image creation and deployment
-Secure credential handling in Jenkins
-🎯 Result
 
-A fully automated pipeline where:
-👉 Code push triggers build → Docker image → deployment without manual effort
+---
+
+## 🌐 Access Application
+- 🧩 Jenkins: http://localhost:8080  
+- 🌍 Application: http://localhost:3000  
+
+---
+
+## 🔐 Credentials Used
+- 🔑 GitHub credentials → repository access  
+- 🔑 Docker Hub credentials → image push  
+- 🛡️ Managed securely using Jenkins Credentials Manager  
+
+---
+
+## 🧠 Key Learnings
+- 🔄 CI/CD automation using Jenkins  
+- 🐳 Docker image creation & deployment  
+- 🧾 Jenkinsfile (Pipeline as Code)  
+- 🔐 Secure credential handling in DevOps  
+
+---
+
+## 🎯 Result
+A fully automated CI/CD pipeline where code push triggers:
+👉 Build → Docker Image → Push → Deployment automatically 🚀
