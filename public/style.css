@@ -1,0 +1,221 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0a0a0f;
+  --surface:  #111118;
+  --border:   rgba(255,180,0,0.15);
+  --yellow:   #ffb400;
+  --yellow-d: rgba(255,180,0,0.12);
+  --yellow-g: rgba(255,180,0,0.3);
+  --text:     #e8e0d0;
+  --dim:      #4a4a5a;
+  --font-d:   'Outfit', sans-serif;
+  --font-m:   'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font-d);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.bg-noise {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+.bg-gradient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(255,180,0,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 20% at 90% 80%, rgba(255,140,0,0.04) 0%, transparent 60%);
+}
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 36px 24px 48px;
+  display: flex; flex-direction: column; gap: 40px;
+}
+
+/* TOP BAR */
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  animation: fade-up 0.5s ease both;
+}
+.topbar-brand {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 15px; color: var(--yellow);
+  letter-spacing: 0.05em;
+}
+.jenkins-icon { font-size: 18px; }
+.topbar-status {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--dim);
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #00e87a;
+  box-shadow: 0 0 8px #00e87a;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* HERO */
+.hero { animation: fade-up 0.5s 0.1s ease both; }
+
+.hero-tag {
+  font-size: 11px; letter-spacing: 0.2em;
+  color: var(--yellow); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-tag::before {
+  content: '';
+  display: inline-block; width: 24px; height: 1px;
+  background: var(--yellow);
+}
+
+.hero-title {
+  font-size: clamp(52px, 10vw, 88px);
+  font-weight: 900; line-height: 0.95;
+  letter-spacing: -3px;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.accent { color: var(--yellow); }
+
+.hero-sub {
+  font-size: 15px; font-weight: 300;
+  color: var(--dim); max-width: 400px;
+  line-height: 1.6;
+}
+
+/* PIPELINE */
+.pipeline {
+  display: flex; align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px 24px;
+  animation: fade-up 0.5s 0.2s ease both;
+}
+.stage {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 0 0 auto;
+  cursor: default;
+  transition: all 0.3s;
+}
+.stage-icon {
+  font-size: 20px; color: var(--dim);
+  transition: all 0.3s;
+}
+.stage-name {
+  font-size: 10px; color: var(--dim);
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+}
+.stage.active .stage-icon { color: var(--yellow); text-shadow: 0 0 12px var(--yellow-g); }
+.stage.active .stage-name { color: var(--yellow); }
+.stage.done .stage-icon   { color: #00e87a; }
+.stage.done .stage-name   { color: #00e87a; }
+
+.stage-connector {
+  flex: 1; height: 1px;
+  background: var(--border);
+  margin: 0 8px; margin-bottom: 18px;
+  position: relative; overflow: hidden;
+}
+.connector-fill {
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--yellow);
+  transition: left 0.6s ease;
+}
+.connector-fill.active { left: 0; }
+
+/* CARD */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  animation: fade-up 0.5s 0.3s ease both;
+}
+.card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.card-label { font-size: 10px; color: var(--dim); letter-spacing: 0.15em; }
+.endpoint   { font-size: 12px; color: var(--yellow); }
+
+.mono { font-family: var(--font-m); }
+
+/* BUTTON */
+.trigger-btn {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: calc(100% - 40px); margin: 20px;
+  padding: 15px;
+  background: var(--yellow);
+  border: none; border-radius: 2px;
+  color: #0a0a0f;
+  font-family: var(--font-d);
+  font-size: 15px; font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: all 0.25s ease;
+}
+.trigger-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.trigger-btn:hover::after { transform: scaleX(1); }
+.trigger-btn:hover { box-shadow: 0 0 32px var(--yellow-g); transform: translateY(-1px); }
+.trigger-btn:active { transform: scale(0.98); }
+.trigger-btn.running { opacity: 0.7; pointer-events: none; }
+.btn-icon { font-size: 12px; }
+
+/* RESPONSE */
+.response-area {
+  margin: 0 20px 20px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 16px;
+  min-height: 52px;
+}
+#msg {
+  font-size: 13px; color: var(--dim);
+  line-height: 1.6; transition: color 0.3s;
+}
+#msg.success { color: #00e87a; font-size: 15px; font-family: var(--font-d); font-weight: 500; }
+#msg.error   { color: #ff4d6d; }
+
+/* FOOTER */
+.footer {
+  text-align: center; font-size: 11px;
+  color: var(--dim); letter-spacing: 0.1em;
+  animation: fade-up 0.5s 0.4s ease both;
+}
+
+/* ANIMATIONS */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .hero-title { letter-spacing: -2px; }
+  .pipeline { padding: 16px; }
+  .trigger-btn { width: calc(100% - 32px); margin: 16px; }
+  .response-area { margin: 0 16px 16px; }
+}

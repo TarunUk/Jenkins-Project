@@ -1,42 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Jenkins Project UI</title>
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 100px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #msg {
-            margin-top: 20px;
-            font-size: 20px;
-            color: green;
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jenkins CI/CD</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-    <h1>🚀 Jenkins CI/CD Demo App</h1>
+  <div class="bg-noise"></div>
+  <div class="bg-gradient"></div>
 
-    <button onclick="getMessage()">Click Me</button>
+  <main class="container">
 
-    <div id="msg"></div>
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-brand">
+        <span class="jenkins-icon">⬡</span>
+        <span>Jenkins</span>
+      </div>
+      <div class="topbar-status">
+        <span class="live-dot"></span>
+        <span class="mono">Pipeline Active</span>
+      </div>
+    </div>
 
-    <script>
-        function getMessage() {
-            fetch("/api/message")
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById("msg").innerText = data.message;
-                });
-        }
-    </script>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-tag mono">CI/CD AUTOMATION</div>
+      <h1 class="hero-title">
+        Build.<br/>
+        <span class="accent">Test.</span><br/>
+        Deploy.
+      </h1>
+      <p class="hero-sub">Automated pipeline orchestration — from commit to production in seconds.</p>
+    </section>
 
+    <!-- Pipeline stages -->
+    <div class="pipeline">
+      <div class="stage" data-stage="0">
+        <div class="stage-icon">⬢</div>
+        <div class="stage-name mono">Source</div>
+      </div>
+      <div class="stage-connector"><div class="connector-fill"></div></div>
+      <div class="stage" data-stage="1">
+        <div class="stage-icon">◈</div>
+        <div class="stage-name mono">Build</div>
+      </div>
+      <div class="stage-connector"><div class="connector-fill"></div></div>
+      <div class="stage" data-stage="2">
+        <div class="stage-icon">◉</div>
+        <div class="stage-name mono">Test</div>
+      </div>
+      <div class="stage-connector"><div class="connector-fill"></div></div>
+      <div class="stage" data-stage="3">
+        <div class="stage-icon">⬡</div>
+        <div class="stage-name mono">Deploy</div>
+      </div>
+    </div>
+
+    <!-- Action card -->
+    <div class="card">
+      <div class="card-header">
+        <span class="mono card-label">API ENDPOINT</span>
+        <span class="mono endpoint">/api/message</span>
+      </div>
+
+      <button class="trigger-btn" id="triggerBtn" onclick="getMessage()">
+        <span class="btn-icon">▶</span>
+        <span class="btn-label">Trigger Pipeline</span>
+      </button>
+
+      <div class="response-area" id="responseArea">
+        <div class="response-placeholder mono" id="msg">
+          // Awaiting trigger...
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mono">
+      Jenkins · CI/CD · Automated Delivery
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
