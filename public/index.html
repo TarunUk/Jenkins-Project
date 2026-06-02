@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jenkins Project UI</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #msg {
+            margin-top: 20px;
+            font-size: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 Jenkins CI/CD Demo App</h1>
+
+    <button onclick="getMessage()">Click Me</button>
+
+    <div id="msg"></div>
+
+    <script>
+        function getMessage() {
+            fetch("/api/message")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("msg").innerText = data.message;
+                });
+        }
+    </script>
+
+</body>
+</html>
